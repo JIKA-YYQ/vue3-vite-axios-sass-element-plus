@@ -1,0 +1,28 @@
+{
+  "name": "vue3-vite-test",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --mode development",
+    "build:qa": "vite build --mode qa",
+    "build:prod": "vite build --mode prod"
+  },
+  "dependencies": {
+    "axios": "^0.22.0",
+    "element-plus": "^1.2.0-beta.6",
+    "qs": "^6.10.1",
+    "typescript": "^4.4.3",
+    "vue": "^3.2.19",
+    "vue-router": "^4.0.10"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.3",
+    "@types/qs": "^6.9.7",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/compiler-sfc": "^3.0.4",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "vite": "^2.6.5",
+    "vite-plugin-components": "^0.13.3",
+    "vite-plugin-style-import": "^1.4.0"
+  }
+}

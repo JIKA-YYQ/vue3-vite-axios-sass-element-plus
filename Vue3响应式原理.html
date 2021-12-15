@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3响应式原理</title>
+</head>
+<body>
+    <script type="text/javascript">
+        const user = {
+            name: 'jika',
+            age: 28,
+            love: 'code',
+            husband: {
+                name: 'star',
+                age: 20
+            }
+        }
+        const proxyUser = new Proxy(user, {
+            get (target, key) {
+                return Reflect.get(target, key)
+            },
+            // 修改目标对象的属性值，也可对目标对象添加属性
+            set (target, key, val) {
+                return Reflect.set(target, key, val)
+            },
+            deleteProperty (target, key) {
+                return Reflect.deleteProperty(target, key)
+            }
+        })
+
+        proxyUser.name = 'JIKA'
+        console.log(user)
+
+        proxyUser.gender = '女'
+        console.log(user)
+
+        delete proxyUser.love
+        console.log(user)
+        
+        proxyUser.husband.name = 'STAR'
+        console.log(user)
+    </script>
+</body>
+</html>
