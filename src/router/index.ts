@@ -6,13 +6,35 @@ const routes: RouteRecordRaw[] = [
         path: '/', 
         redirect: '/home' 
     },
+    {
+        path: '/login',
+        component: () => import('../view/login.vue'),
+        meta: { 
+            title: {
+                zh: '登录',
+                en: 'Login'
+            }
+        }
+    },
     { 
         path: '/home', 
-        component: () => import('../view/home.vue') 
+        component: () => import('../view/home.vue'),
+        meta: { 
+            title: {
+                zh: '主页',
+                en: 'Home'
+            }
+        }
     },
     {
         path: '/lifecycle', 
-        component: () => import('../view/lifecycle.vue')
+        component: () => import('../view/lifecycle.vue'),
+        meta: { 
+            title: {
+                zh: '生命周期',
+                en: 'Lifecycle'
+            }
+        }
     }
 ]
 

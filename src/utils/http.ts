@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import config from '../../config'
 import qs from "qs"
-// import { ElMessage } from "element-plus"
+import { ElMessage } from "element-plus"
 
 const showStatus = (status: number) => {
     let message = ''
@@ -163,7 +163,7 @@ service.interceptors.response.use((response: AxiosResponse) => {
         // 错误抛到业务代码
         error.data = {}
         error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！'
-        // ElMessage.error(error.data.msg)
+        ElMessage.error(error.data.msg)
     }
     return Promise.reject(error)
 })

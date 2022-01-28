@@ -1,0 +1,27 @@
+$main-color: #7e63dc; //主色色
+$minor-color: #8d89fb;  //二级色
+$main-text-color: #303133;
+$minor-text-color: #606266;
+
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+    $colors: (
+        "primary": (
+            "base": #7e63dc,
+        ),
+        "success": (
+            "base": #67C23A,
+        ),
+        "warning": (
+            "base": #E6A23C,
+        ),
+        "danger": (
+            "base": #F56C6C,
+        ),
+        "error": (
+            "base": #F56C6C,
+        ),
+        "info": (
+            "base": #909399,
+        ),
+    ),
+);

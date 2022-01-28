@@ -11,7 +11,7 @@ interface LoginParams {
     password: string
 }
 //封装home类型的接口方法
-export class home {
+export class login {
     static async login(params: LoginParams): Promise<HttpResponse> {
         return service('/api/user', {
             method: 'post',
@@ -22,13 +22,10 @@ export class home {
         })
     }
 
-    static async resgister(params: LoginParams): Promise<HttpResponse> {
-        return service('/api/user/resgister', {
+    static async userInfo(): Promise<HttpResponse> {
+        return service('/api/user/user_info', {
             method: 'get',
             responseType: 'json',
-            params: {
-                ...params
-            },
         })
     }
 }

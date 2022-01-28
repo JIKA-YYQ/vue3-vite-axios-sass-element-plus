@@ -1,8 +1,10 @@
 <template>
-    <p>lifecycle</p>
-    <button @click="showChild = !showChild">加载/卸载Child</button>
-    <hr>
-    <Child v-if="showChild"></Child>
+    <div>
+        <p>lifecycle</p>
+        <button @click="showChild = !showChild">加载/卸载Child</button>
+        <hr>
+        <Child v-if="showChild"></Child>
+    </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
