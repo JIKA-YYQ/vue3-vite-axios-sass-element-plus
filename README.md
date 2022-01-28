@@ -1,4 +1,4 @@
-使用到的框架、工具：Vue3 + TypeScript + Vite + Element-plus + Axios + Sass
+使用到的框架、工具：Vue3 + TypeScript + Vite + Element-plus + Axios + Sass + vue-i18n + vuex
 
 #############
 
