@@ -7,7 +7,7 @@
 				<el-scrollbar height="100%" style="width: 100%">
 					<router-view v-slot="{ Component }">
 						<template v-if="route && route.title">
-							<el-breadcrumb separator=">" class="BREAD">
+							<el-breadcrumb separator="/" class="BREAD">
 								<el-breadcrumb-item v-for="(name,index) in route.title" :key="index">{{ $t(name) }}</el-breadcrumb-item>
 							</el-breadcrumb>
 						</template>
