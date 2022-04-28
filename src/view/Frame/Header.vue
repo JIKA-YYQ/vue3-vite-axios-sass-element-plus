@@ -46,8 +46,8 @@
     const lan = ref('zhCn')
     const $router = useRouter()
     const $store = useStore()
-
-    const { locale } = getCurrentInstance().appContext.config.globalProperties.$i18n()
+    
+    const { t, locale } = getCurrentInstance().appContext.config.globalProperties.$i18n()
     const language = computed(() => $store.state.language.language)
     
     lan.value = language.value
@@ -59,8 +59,10 @@
             if (locale) {
                 if (type == 'zhCn') {
                     locale.value = 'zh-cn'
+                    document.title = `${ $router.currentRoute.value.meta.title.zh} | ${ t('systemName') }`
                 } else {
                     locale.value = 'en-us'
+                    document.title = `${ $router.currentRoute.value.meta.title.en } | ${ t('systemName') }`
                 }
             }
         }
@@ -72,8 +74,6 @@
     })
     const errorHandler = () => true
     const logout = () => {
-        //清除登录信息
-        
         $router.push('/login')
     }
 

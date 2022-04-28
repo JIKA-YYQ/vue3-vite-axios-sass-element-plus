@@ -18,14 +18,23 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: '@use "@/assets/scss/definedElement.scss" as *;',
+				additionalData: `@use "@/assets/scss/definedElement.scss" as *;`,
 			}
 		}
 	},
 	plugins: [
 		vue(),
+		viteSvgIcons({
+			// 指定需要缓存的图标文件夹
+			iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+			// 指定symbolId格式
+			symbolId: 'icon-[dir]-[name]',
+		}),
 		AutoImport({
-			resolvers: [ElementPlusResolver()],
+			resolvers: [ElementPlusResolver({
+				// 自动引入修改主题色添加这一行，使用预处理样式，不添加将会导致使用ElMessage，ElNotification等组件时默认的主题色会覆盖自定义的主题色
+				importStyle: "sass"
+			})],
 		}),
 		Components({
 			resolvers: [ElementPlusResolver({
@@ -33,11 +42,5 @@ export default defineConfig({
 				importStyle: "sass",
 			})],
 		}),
-		viteSvgIcons({
-			// 指定需要缓存的图标文件夹
-			iconDirs: [path.resolve(process.cwd(), 'src/icons')],
-			// 指定symbolId格式
-			symbolId: 'icon-[dir]-[name]',
-		})
 	]
 })

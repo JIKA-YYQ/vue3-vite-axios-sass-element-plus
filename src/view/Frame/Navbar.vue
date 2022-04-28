@@ -141,7 +141,7 @@ export default defineComponent({
         }
 
         const loopTitle = () => {
-            let titleArr = []
+            let titleArr:any = []
             const mark = ref(false)
             navlist.map(item1 => {
                 if (item1.path === activeIndex.value) {
@@ -149,14 +149,14 @@ export default defineComponent({
                     mark.value = true
                 }
                 if (!mark.value && item1.subs && item1.subs.length) {
-                    item1.subs.map(item2 => {
+                    item1.subs.map((item2:any) => {
                         if (item2.path === activeIndex.value) {
                             titleArr.push(item1.name)
                             titleArr.push(item2.name)
                             mark.value = true
                         }
                         if (!mark.value && item2.subs && item2.subs.length) {
-                            item2.subs.map(item3 => {
+                            item2.subs.map((item3:any) => {
                                 if (item3.path === activeIndex.value) {
                                     titleArr.push(item1.name)
                                     titleArr.push(item2.name)
@@ -177,13 +177,11 @@ export default defineComponent({
 
         watch(
             () => $router.currentRoute.value,
-            (routeObj, oldRouteObj) => {
+            (routeObj) => {
                 //初始化选中菜单
                 activeIndex.value = ''
                 
                 $store.commit('route/setTitle', [])
-                
-                let title = t('systemName')
 
                 setTimeout(()=> {
                     activeIndex.value = $router.currentRoute.value.path
@@ -191,9 +189,9 @@ export default defineComponent({
                     $store.commit('route/setTitle', loopTitle())
 
                     if (routeObj.meta && routeObj.meta.title) {
-                        document.title = `${ locale.value == 'zh-cn' ? routeObj.meta.title.zh : routeObj.meta.title.en } | ${ title }`
+                        document.title = `${ locale.value == 'zh-cn' ? routeObj.meta.title.zh : routeObj.meta.title.en } | ${ t('systemName') }`
                     } else {
-                        document.title = title
+                        document.title = t('systemName')
                     }
                 },500)
             }

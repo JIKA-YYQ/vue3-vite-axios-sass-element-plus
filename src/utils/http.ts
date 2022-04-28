@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import config from '../../config'
+import { getLocal } from '@/utils/local'
 import qs from "qs"
+import 'element-plus/es/components/message/style/css'
 import { ElMessage } from "element-plus"
 
 const showStatus = (status: number) => {
@@ -103,7 +105,7 @@ const service = axios.create({
         }
     },
     // 是否跨站点访问控制请求
-    withCredentials: true,
+    withCredentials: false,
     timeout: 30000,
     transformRequest: [(data) => {
         data = JSON.stringify(data)
@@ -127,10 +129,12 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
     removePending(config) // 在请求开始前，对之前的请求做检查取消操作
     addPending(config) // 将当前请求添加到 pending 中
     //获取token，并将其添加至请求头中
-    let token = localStorage.getItem('token')
+    let token = getLocal('token')
     if (token) {
-        config.headers.Authorization = `${token}`;
+        config.headers.Authorization = `bearer ${token}`;
+        config.headers['X-Token'] = `bearer ${token}`;
     }
+    config.headers['token-from'] = 'admin'
     return config
 }, (error) => {
     // 错误抛到业务代码

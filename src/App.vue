@@ -31,6 +31,7 @@ import Header from '@/view/Frame/Header.vue'
 import NavBar from '@/view/Frame/Navbar.vue'
 import zhCn from 'element-plus/lib/locale/lang/zh-cn'
 import en from 'element-plus/lib/locale/lang/en'
+import { getLocal, removeLocal } from '@/utils/local'
 
 export default defineComponent({
     name: 'App',
@@ -49,7 +50,7 @@ export default defineComponent({
 		},
 	}),
 	setup () {
-		const noMenu: string[]  = ['/login']
+		const noMenu: string[]  = ['/login'] //不在框架内的页面
 		const showMenu = ref(false)
 		const lan = ref('zhCn')
 		const $store = useStore()
@@ -73,13 +74,15 @@ export default defineComponent({
 
 			if (to.path == '/login') {
 				document.title = locale.value == 'zh-cn' ? to.meta.title.zh : to.meta.title.en
-				//清除token
+
+				removeLocal('token')
+				removeLocal('userInfo')
 				
 				next()
 			} else {
 				//判断是否有token,无token跳转登录
-
-				next()
+				getLocal('token') && next();
+				!getLocal('token') && $router.push('/login')
 			}
 		})
 		return {

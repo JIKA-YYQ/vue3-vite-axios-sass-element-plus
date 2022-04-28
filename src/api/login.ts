@@ -7,25 +7,28 @@ import { HttpResponse } from '@/utils/response'
  * @property {string} password -用户密码
  */
 interface LoginParams {
-    username: string
+    account: string
     password: string
 }
-//封装home类型的接口方法
+//封装login类型的接口方法
 export class login {
     static async login(params: LoginParams): Promise<HttpResponse> {
-        return service('/api/user', {
+        return service('/api/admin_login', {
             method: 'post',
             responseType: 'json',
-            params: {
+            data: {
                 ...params
             },
         })
     }
 
-    static async userInfo(): Promise<HttpResponse> {
-        return service('/api/user/user_info', {
+    static async userInfo(token: string): Promise<HttpResponse> {
+        return service('/api/admin_user', {
             method: 'get',
             responseType: 'json',
+            params: {
+                token
+            }
         })
     }
 }

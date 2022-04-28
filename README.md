@@ -8,7 +8,7 @@
 
 2.动态引入iconfont图标库
 
-3.按需引入Element-plus
+3.按需引入-自动导入Element-plus
 
 4.UI主题自定义
 

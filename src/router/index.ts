@@ -1,5 +1,6 @@
 import { RouteRecordRaw, createWebHashHistory, createRouter } from "vue-router"
 import { clearPending } from "@/utils/http"
+import { setLocal } from'@/utils/local'
 
 const routes: RouteRecordRaw[] = [
     { 
@@ -44,8 +45,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    setLocal('fromRoute',from.path)
+
     //在跳转路由之前，先清除所有的请求
     clearPending()
+    
     next()
 })
 export default router

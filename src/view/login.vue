@@ -8,11 +8,10 @@
             <div class="name-password">
                 <el-form ref="ruleFormRef" :model="loginForm" labelPosition="top">
                     <el-form-item 
-                    prop="name"
+                    prop="account"
                     :label="$t('login.account')" 
                     :rules="[{required: true, message: $t('login.mustAccount'), trigger: 'change'}]">
-                        <el-input v-model.trim="loginForm.name">
-                        </el-input>
+                        <el-input v-model.trim="loginForm.account"></el-input>
                     </el-form-item>
                     <el-form-item 
                     prop="password"
@@ -29,8 +28,10 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { setLocal } from '@/utils/local'
 import type { ElForm } from 'element-plus'
 import { login } from '@/api/login'
+import { getLocal } from '@/utils/local'
 export default defineComponent({
     name: 'login',
     setup () {
@@ -38,7 +39,7 @@ export default defineComponent({
         const $route = useRoute()
         const $router = useRouter()
         const loginForm = reactive({
-            name: '',
+            account: '',
             password: ''
         })
         const Login = (ruleForm: InstanceType<typeof ElForm> | undefined) => {
@@ -47,14 +48,32 @@ export default defineComponent({
                 if (!valid) {
                     return false
                 } else {
-                    //调登录接口，保存token
+                    //调登录接口
                     login.login(loginForm)
-                    const toPath = $route.query.redirect
-                    if (toPath) {
-                        $router.push(toPath)
-                    } else {
-                        $router.push('/')
-                    }
+                    .then(res => {
+                        if (res.data.code == 200) {
+                            //保存token
+                            setLocal('token',res.data.data.token)
+                            //保存登录者信息
+                            login.userInfo(res.data.data.token)
+                            .then(res2 => {
+                                setLocal('userInfo',res2.data.data)
+                            })
+                            .then(() => {
+                                const history = getLocal('fromRoute')
+                                if (history) {
+                                    $router.push(history)
+                                } else {
+                                    $router.push('/')
+                                }
+                            })
+                        } else {
+                            ElMessage.error(res.data.message.message.cn)
+                        }
+                    })
+                    .catch(err => {
+                        console.log('err',err)
+                    })
                 }
             })
         }
