@@ -1,7 +1,7 @@
 <template>
 	<el-config-provider :locale="locale">
 		<template v-if="showMenu">
-			<Header/>
+			<Header></Header>
 			<div class="CONTENT">
 				<NavBar ref="navbar"/>
 				<el-scrollbar height="100%" style="width: 100%">

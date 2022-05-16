@@ -1,11 +1,9 @@
 <template>
     <div>
-        <el-date-picker
-        v-model="value1"
-        type="datetime"
-        >
+        <el-date-picker v-model="value1" type="datetime">
         </el-date-picker>
         <el-button type="primary">{{ $t('group_1.button') }}</el-button>
+        <el-switch v-model="value1" />
         <span v-for="i in 300">{{i}}-{{ $t('navbar.home') }}</span>
     </div>
 </template>

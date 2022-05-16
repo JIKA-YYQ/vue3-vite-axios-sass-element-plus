@@ -21,6 +21,7 @@ declare module 'vue' {
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
     GrandSon: typeof import('./src/components/GrandSon.vue')['default']
     Son: typeof import('./src/components/Son.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']

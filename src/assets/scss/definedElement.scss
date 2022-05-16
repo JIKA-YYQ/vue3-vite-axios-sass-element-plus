@@ -6,22 +6,22 @@ $minor-text-color: #606266;
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
     $colors: (
         "primary": (
-            "base": $main-color,
+            "base": $main-color
         ),
         "success": (
-            "base": #67C23A,
+            "base": #67C23A
         ),
         "warning": (
-            "base": #E6A23C,
+            "base": #E6A23C
         ),
         "danger": (
-            "base": #F56C6C,
+            "base": #F56C6C
         ),
         "error": (
-            "base": #F56C6C,
+            "base": #F56C6C
         ),
         "info": (
-            "base": #909399,
+            "base": #909399
         ),
     ),
 );

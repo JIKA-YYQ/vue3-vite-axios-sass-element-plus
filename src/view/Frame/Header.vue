@@ -52,17 +52,24 @@
     
     lan.value = language.value
 
-    const changeLan = (type) => {
+    const changeLan = (type:string) => {
         if (type !== lan.value) {
             lan.value = type
             $store.commit('language/setLanguage', type)
             if (locale) {
+                let saveLan = 'en'
                 if (type == 'zhCn') {
+                    saveLan = 'zh'
                     locale.value = 'zh-cn'
-                    document.title = `${ $router.currentRoute.value.meta.title.zh} | ${ t('systemName') }`
                 } else {
                     locale.value = 'en-us'
-                    document.title = `${ $router.currentRoute.value.meta.title.en } | ${ t('systemName') }`
+                }
+
+                if ($router.currentRoute.value.meta.title) {
+                    let title = $router.currentRoute.value.meta.title[saveLan as keyof typeof $router.currentRoute.value.meta.title]
+                    document.title = `${ title } | ${ t('systemName') }`
+                } else {
+                    document.title = `${ t('systemName') }`
                 }
             }
         }
@@ -88,7 +95,7 @@
         }
     ]
 
-    const toPath = (path) => {
+    const toPath = (path:string) => {
         $router.push(path)
     }
 

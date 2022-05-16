@@ -30,6 +30,7 @@ import { defineComponent, ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { setLocal } from '@/utils/local'
 import type { ElForm } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { login } from '@/api/login'
 import { getLocal } from '@/utils/local'
 export default defineComponent({
@@ -44,7 +45,7 @@ export default defineComponent({
         })
         const Login = (ruleForm: InstanceType<typeof ElForm> | undefined) => {
             if(!ruleForm) return;
-            ruleForm.validate(valid => {
+            ruleForm.validate((valid): any => {
                 if (!valid) {
                     return false
                 } else {

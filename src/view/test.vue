@@ -130,6 +130,9 @@ export default defineComponent({
             console.log('异步返回：',res)
         })
 
+        // reactive 和 ref 都是用来定义响应式数据的 reactive更推荐去定义复杂的数据类型 ref 更推荐定义基本类型
+
+        // ref 和 reactive 本质我们可以简单地理解为ref是对reactive的二次包装， ref定义的数据访问的时候要多一个.value
         
         const count = ref(0)    //ref通过给value属性添加getter/setter方法实现对数据的劫持
 
