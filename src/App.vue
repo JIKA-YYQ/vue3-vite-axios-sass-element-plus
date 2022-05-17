@@ -40,8 +40,8 @@ export default defineComponent({
         NavBar,
     },
 	computed: mapState({
-		route: state => state.route,
-		locale: state => {
+		route: (state:any) => state.route,
+		locale: (state:any) => {
 			if (state.language.language === 'zhCn') {
 				return zhCn
 			} else {
@@ -69,7 +69,8 @@ export default defineComponent({
 
 		$store.commit('language/setLanguage', lan.value)
 
-		const routeJudge = $router.beforeEach((to, from, next) => {
+		const routeJudge = $router.beforeEach((to:any, from:any, next: any) => {
+			console.log(from)
 			showMenu.value = !noMenu.includes(to.path)
 
 			if (to.path == '/login') {
@@ -87,6 +88,7 @@ export default defineComponent({
 		})
 		return {
 			showMenu,
+			routeJudge
 		}
 	}
 })

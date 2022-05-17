@@ -126,7 +126,7 @@ export default defineComponent({
 
         watch(
             () => $router.currentRoute.value,
-            (routeObj) => {
+            (routeObj:any) => {
                 //初始化选中菜单
                 activeIndex.value = ''
                 
