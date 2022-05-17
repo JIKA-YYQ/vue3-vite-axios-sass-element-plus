@@ -57,7 +57,7 @@ export default defineComponent({
 		const $router = useRouter()
 
 		const { locale } = getCurrentInstance().appContext.config.globalProperties.$i18n()
-		const loc = (navigator.language || navigator.browserLanguage).toLowerCase()
+		const loc = navigator.language.toLowerCase()
 		
 		if (loc == 'zh' || loc == 'zh-cn') {
 			lan.value = 'zhCn';

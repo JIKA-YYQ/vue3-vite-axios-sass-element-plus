@@ -27,7 +27,8 @@
 		"types": [
 			"vite/client",
 			"element-plus/global"
-		]
+		],
+		"jsx": "preserve"	//模板上的TypeScript intellisense已启用
 	},
 	"exclude": ["node_modules"],	//表示要排除的，不编译的文件，它也可以指定一个列表，规则和include一样，可以是文件可以是文件夹，可以是相对路径或绝对路径，可以使用通配符
 	"include": ["src"]	//指定要编译的路径列表

@@ -19,7 +19,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, watch, ref, onMounted, getCurrentInstance, reactive } from 'vue'
+import { defineComponent, watch, ref, onMounted, getCurrentInstance, nextTick } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import svgIcon from '@/components/SvgIcon.vue'
@@ -99,7 +99,6 @@ export default defineComponent({
             }
         }
 
-        
         const loop = function (list:any[], target:string, pathList?:string[]) {
             let saveList = [];
             let copyPath = pathList ? JSON.parse(JSON.stringify(pathList)) : [];
@@ -133,7 +132,7 @@ export default defineComponent({
                 
                 $store.commit('route/setTitle', [])
 
-                setTimeout(()=> {
+                nextTick(()=> {
                     activeIndex.value = $router.currentRoute.value.path;
                     $store.commit('route/setTitle', loopTitle())
 
@@ -142,7 +141,7 @@ export default defineComponent({
                     } else {
                         document.title = t('systemName')
                     }
-                },500)
+                })
             }
         )
         return {
