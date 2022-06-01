@@ -69,7 +69,7 @@ export default defineComponent({
 
 		$store.commit('language/setLanguage', lan.value)
 
-		const routeJudge = $router.beforeEach((to:any, from:any, next: any) => {
+		const routeJudge = $router.beforeEach((to:any, from:any, next:any) => {
 			console.log(from)
 			showMenu.value = !noMenu.includes(to.path)
 

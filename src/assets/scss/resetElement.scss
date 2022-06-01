@@ -2,3 +2,14 @@
 .el-sub-menu__title {
     padding: 0;
 }
+.el-menu-item,.el-sub-menu__title {
+    border-left: 5px solid transparent;
+}
+.el-menu-item.is-active {
+    color: #ffd04b !important;
+    border-left: 5px solid #ffd04b;
+}
+.el-menu--collapse .el-sub-menu.is-active .el-sub-menu__title {
+    color: #ffd04b !important;
+    border-left: 5px solid #ffd04b;
+}

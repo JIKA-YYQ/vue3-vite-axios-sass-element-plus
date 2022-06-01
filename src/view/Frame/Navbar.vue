@@ -2,6 +2,7 @@
     <div class="NAVBAR">
         <el-scrollbar height="calc(100vh - 50px)">
             <el-menu
+            unique-opened
             :default-active="activeIndex"
             :collapse="isCollapse"
             background-color="#7e63dc"
@@ -20,6 +21,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, watch, ref, onMounted, getCurrentInstance, nextTick } from 'vue'
+import { navList } from '@/utils/navlist'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import svgIcon from '@/components/SvgIcon.vue'
@@ -32,63 +34,13 @@ export default defineComponent({
         subMenu
     },
     setup () {
+        const navlist: any[] = navList  //导航列表
         const isCollapse = ref(true)
         const activeIndex = ref('')
         const $router = useRouter()
         const $store = useStore()
         const { t, locale } =  getCurrentInstance().appContext.config.globalProperties.$i18n()
         let pathLists:Array<string> = []
-
-        const navlist: any[] = [
-            {
-                name: 'navbar.home',
-                icon: 'home',
-                path:'/home'
-            },
-            {
-                name: 'navbar.schedule',
-                icon: 'arrange',
-                path:'/PBL',
-                // disabled: true
-            },
-            {
-                name: 'navbar.assets.assets',
-                icon: 'goods',
-                path: 'goods',
-                subs: [
-                    { name: 'navbar.assets.warehousing', path:'/A' },
-                    { name: 'navbar.assets.borrow', path:'/B',disabled: true }
-                ]
-            },
-            {
-                name: 'navbar.employees.employees',
-                icon: 'people',
-                path: 'people',
-                subs: [
-                    {
-                        name: 'navbar.employees.longTerm',
-                        path: 'people_A',
-                        subs: [
-                            { name:'navbar.employees.joinOrExit', path:'/C',disabled: true },
-                            { name: 'navbar.employees.assignment', path:'/lifecycle' }
-                        ]
-                    },
-                    {
-                        name: 'navbar.employees.shortTerm',
-                        path: 'people_B',
-                        subs: [
-                            { name: 'navbar.employees.joinOrExit', path:'/D' },
-                            { name: 'navbar.employees.assignment', path:'/E', 
-                                subs: [
-                                    { name: 'navbar.employees.joinOrExit', path:'/F' },
-                                    { name: 'navbar.employees.assignment', path:'/G' }
-                                ] 
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
 
         const changeMargin = () => {
             let clientWidth = document.body.clientWidth
@@ -132,7 +84,7 @@ export default defineComponent({
                 
                 $store.commit('route/setTitle', [])
 
-                nextTick(()=> {
+                setTimeout(()=> {
                     activeIndex.value = $router.currentRoute.value.path;
                     $store.commit('route/setTitle', loopTitle())
 
@@ -141,7 +93,7 @@ export default defineComponent({
                     } else {
                         document.title = t('systemName')
                     }
-                })
+                },500)
             }
         )
         return {

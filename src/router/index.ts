@@ -36,6 +36,26 @@ const routes: RouteRecordRaw[] = [
                 en: 'Lifecycle'
             }
         }
+    },
+    {
+        path: '/test', 
+        component: () => import('../view/test.vue'),
+        meta: { 
+            title: {
+                zh: 'TS学习',
+                en: 'Learning TS'
+            }
+        }
+    },
+    {
+        path: '/test2',
+        component: () => import('../view/test2.vue'),
+        meta: {
+            title: {
+                zh: 'TS学习--2',
+                en: 'Learning TS -- 2'
+            }
+        }
     }
 ]
 
