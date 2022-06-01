@@ -8,7 +8,7 @@
                 :width="18"
                 :height="18"
                 :color="activeIndex == list.path ? '#ffd04b' : '#ffffff'"/>
-                <span class="padding-left" :class="{'activeColor': activeIndex == list.path}">{{ t(list.name) }}</span>
+                <span class="padding-left">{{ t(list.name) }}</span>
             </template>
             <template v-for="(item,i) in list.subs" :key="i">
                 <sub-menu v-if="item" :list="item"></sub-menu>
@@ -24,7 +24,7 @@
             :height="18"
             :color="activeIndex == list.path ? '#ffd04b' : '#ffffff'"/>
             <template #title>
-                <span class="padding-left" :class="{'activeColor': activeIndex == list.path}">{{ t(list.name) }}</span>
+                <span class="padding-left">{{ t(list.name) }}</span>
             </template>
         </el-menu-item>
     </template>
@@ -86,9 +86,6 @@ export default defineComponent({
     }
     .padding-left {
         padding-left: .5rem;
-    }
-    .activeColor {
-        color: #ffd04b;
     }
 }
 </style>
